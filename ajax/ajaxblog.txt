@@ -1,0 +1,101 @@
+my first ajax wow its amazing
+
+I feel happy that i have learned to use ajax in my web application ,initially i used to hear these words "Ajax","jquery" it was scarring me that there are more technologies that i havn't learned in my college days but i have completed my engineering with first class but after coming out of college ,when i came to corporate environment people were just crazy about web development the sites they developed was amazing it was dead faster than google nexus(just for comparison please dont mind it).most of the sites had dynamic content and it didnt even tend to load the page to get the data from the server this made me to think from computer science background if i am not able to create a website of my own then my life is going to be useless. so i decided to get in to rails beacause it uses ruby language and it is damn cool and fun language . but still i was not knowing jquery and ajax somehow i learnt basics about javascript and jquery by practicing and watching some videos which are sent by cousin Mr Prasanna from bangalore .I feel happy to Thank him .but "ajax what is this ?" this question was going inside my mind for long time only days was passing but i didnt even look it. but finally i decided today you need to learn ajax no way and i started believe it or not its damn sexy and cool .without loading page i am able to fetch the date and load in to display. i feel happy to share my experience lets get in to pooooooool. 
+
+What is ajax ?
+ajax is Asynchronous javascript and xml
+ajax is used in client side which is used to send and receive data from server assynchronously at the background without loading the page.
+
+Stages to handle ajax
+1.XHR object.
+	initialize xhr object for XMLHttpRequest() to handle the ajax.
+2.handle 'onreadystatechange' event
+  	Listen to the 'onreadystatechange' event triggered by server after our ajax request is sent to server.
+	'readystate' is the property of xhr to which server updates the readystate reagarding the ajax request.
+	
+	   xhr readystatechange  property values
+		 0 - Uninitialized - request not started/not opened
+		 1 - Loading - request has been opened
+		 2 - Loaded - request has been sent to server
+		 3 - interactive - server is in process of sending response
+		 4 - compelete - request is completed
+	
+3.open the request
+	xhr.open() will tell server which page/content to be requested in server and type of request to make.
+	arg1- type of request GET/POST
+	arg2 - URL path of file to be requested.
+4.send the request
+	xhr.send()
+	sending the request to server since we are using GET request no need to send to server.
+	xhr.send(null)
+
+MyExample:
+I used this lovely ajax in rails applcation lets us discuss about it.
+Step1: create a rails application using the command 
+
+	rails new ajax
+
+Step2: create a controller named a simpleajax
+	
+	rails g controller simpleajax index
+
+Step3: remove the index.html under public folder and change the routes.rb to root path
+
+	root to: "simpleajax#index"
+
+Step4: javascript file should get loaded only after DOM elements loaded completely so we need to change the contents in application.html.erb under app/views/layouts/
+	here move "<%= javascript_include_tag "application" %>" line beneath <%yield%> because yield will fetch all the elements from the corresponding view file.
+
+Note:
+  I faced an issue while doing this that document is undefined after replacing this js line beneath yield it got solved.
+
+Step5: index.html.erb under app/views/simpleajax/ add a link
+
+	<a href= 'public/ajax.txt'>Welcome to ajax </a>
+
+Step6: add a text to ajax.txt under public directory
+
+	hello welcome to ajax 
+
+Step7: add this below javascript function in simpleajax.js
+
+
+
+(function(){
+
+	var linke = document.getElementsByTagName("a")[0];
+	console.log(linke);
+	linke.onclick = function(){
+		//XHR object
+		xhr = new XMLHttpRequest();
+		//handle 'onreadystatechange' event
+		//xhr readystatechange  property values
+		// 0 - Uninitialized - request not started/not opened
+		// 1 - Loading - request has been opened
+		// 2 - Loaded - request has been sent to server
+		// 3 - interactive - server is in process of sending response
+		// 4 - compelete - request is completed
+		xhr.onreadystatechange = function(){
+			if((xhr.readyState == 4) && (xhr.status ==200 || xhr.status== 304)){
+				console.log("inside");
+				xhr.responseText;
+				var body = document.getElementsByTagName("body")[0];
+				var p = document.createElement("p");
+				var pText= document.createTextNode(xhr.responseText);
+				p.appendChild(pText);
+	https://support.mozilla.org/en-US/questions/922568			body.appendChild(p);
+			}
+		};
+		//open the request
+		xhr.open("GET",'ajax.txt',true)
+
+		//send the request
+		xhr.send(null);
+		return false
+	};
+})();
+
+
+
+Step8: open the browser and click the link , the contents will be loaded without loading the page
+
