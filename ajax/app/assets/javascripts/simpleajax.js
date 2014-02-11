@@ -24,7 +24,7 @@
 			}
 		};
 		//open the request
-		xhr.open("GET",'ajax.txt',true)
+		xhr.open("GET",'ajax.txt',true);
 
 		//send the request
 		xhr.send(null);

@@ -1,6 +1,9 @@
 Ajax::Application.routes.draw do
 
+  get "renderxmlajax/index"
+
   root to: 'simpleajax#index'
+  get 'renderhtmlajax/index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
