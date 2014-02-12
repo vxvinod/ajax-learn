@@ -1,0 +1,9 @@
+{
+	"heading": "JSON Places in Mumbai",
+	"places": {
+		"place1":"Taj Hotel",
+		"place2":"Marine Drive",
+		"place3":"Alibag",
+		"place4":"Elephanta caves"
+	}
+}
